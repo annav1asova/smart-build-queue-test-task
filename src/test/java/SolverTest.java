@@ -49,38 +49,22 @@ class SolverTest {
 
   @Test
   public void testWithBruteForce5() {
-    final List<Train> trains = generate(5);
-    final DayPlan expected = brute.solve(trains);
-    final DayPlan actual = advanced.solve(trains);
-    assertEquals(expected.getIncome(), actual.getIncome());
-    assertEquals(actual.getIncome(), calculateIncome(trains, actual.getTrains()));
+    testWithBruteForce(5);
   }
 
   @Test
   public void testWithBruteForce10() {
-    final List<Train> trains = generate(10);
-    final DayPlan expected = brute.solve(trains);
-    final DayPlan actual = advanced.solve(trains);
-    assertEquals(expected.getIncome(), actual.getIncome());
-    assertEquals(actual.getIncome(), calculateIncome(trains, actual.getTrains()));
+    testWithBruteForce(10);
   }
 
   @Test
   public void testWithBruteForce15() {
-    final List<Train> trains = generate(15);
-    final DayPlan expected = brute.solve(trains);
-    final DayPlan actual = advanced.solve(trains);
-    assertEquals(expected.getIncome(), actual.getIncome());
-    assertEquals(actual.getIncome(), calculateIncome(trains, actual.getTrains()));
+    testWithBruteForce(15);
   }
 
   @Test
   public void testWithBruteForce20() {
-    final List<Train> trains = generate(20);
-    final DayPlan expected = brute.solve(trains);
-    final DayPlan actual = advanced.solve(trains);
-    assertEquals(expected.getIncome(), actual.getIncome());
-    assertEquals(actual.getIncome(), calculateIncome(trains, actual.getTrains()));
+    testWithBruteForce(20);
   }
 
   private List<Train> generate(int n) {
@@ -105,5 +89,13 @@ class SolverTest {
       final Train train = index.getOrDefault(id, null);
       return train == null ? 0 : train.reward();
     }).sum();
+  }
+
+  private void testWithBruteForce(int n) {
+    final List<Train> trains = generate(n);
+    final DayPlan expected = brute.solve(trains);
+    final DayPlan actual = advanced.solve(trains);
+    assertEquals(expected.getIncome(), actual.getIncome());
+    assertEquals(actual.getIncome(), calculateIncome(trains, actual.getTrains()));
   }
 }
